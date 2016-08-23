@@ -1,0 +1,88 @@
+{% extends "master.html" %}
+{% block contenido %}
+{%load staticfiles%}
+
+<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="navbar-header">
+      <ul class="nav nav-tabs nav-justified">
+        <li role="presentation" class="active">
+          <a href="../Vista"><span class="glyphicon glyphicon-home"></span> Home</a>
+        </li>
+        <li role="presentation">
+          <a href="../consultar"><span class="glyphicon glyphicon-edit"></span> Consulta de Vuelos</a>
+        </li>
+        <li role="presentation">
+          <a href="../reservar"><span class="glyphicon glyphicon-plane"></span> Reserva de Vuelos</a>
+        </li>
+        <li role="presentation">
+          <a href="../comprar"><span class="glyphicon glyphicon-shopping-cart"></span> Compra de Vuelos</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div class="container">
+  <div class="well">
+    <div class="row">
+      <div class="col-sm-9">
+        <table class="table">
+          <tr>
+            <th>Origen</th><th>Destino</th>
+            <th>Partida</th><th>Regreso</th>
+            <th>Clase</th><th>Tipo</th>
+            <th>Adulto</th><th>Niño</th>
+            <th>Bebe</th><th>Tarifa</th><th></th>
+            {% for v in vuelos %}
+            <tr>
+              <td>{{v.origen}}</td><td>{{v.destino}}</td>
+              <td>{{v.partida}}</td><td>{{v.regreso}}</td>
+              <td>{{v.clase}}</td><td>{{v.tipo}}</td>
+              <td>{{v.adulto}}</td><td>{{v.niño}}</td>
+              <td>{{v.bebe}}</td><td>{{v.tarifa}}</td>
+              <td>
+                <a href="../reservaVuelo" class="btn btn-primary btn-md" role="button"
+                   data-toggle="modal" data-target="#myModal">
+                  <span class="glyphicon glyphicon-saved"></span> Reservar
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tr>
+        </table>
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times</button>
+                <h3 class="text text-success" style="text-align:center">Aerolineas Ecuados - Reserva de Vuelos</h3>
+              </div>
+              <div class="modal-body">
+                <p class="text text-info">
+                  Su vuelo ah sido reservado exitosamente, acerquese al areopuerto en la fecha indicada para retirar su
+                  Ticket.<br><center class="text text-info">¡GRACIAS POR PREFERIRNOS!</center>
+                </p>
+              </div>
+              <div class="footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <center>
+          {% if user.is_authenticated == False %}
+          <h3>Por Favor Inicie una Sesión<br><a href="../" class="btn btn-success" role="button">Inicio</a></h3>
+          {% else %}
+          <h3 class="text text-info">Bienvenido/a {{user.username|capfirst}}</h3>
+          <h1 class="text text-info"><span class="glyphicon glyphicon-user"></span></h1>
+          <a href="../salir" class="btn btn-success" role="button">Cerrar Seción</a>
+          {% endif %}
+        </center>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

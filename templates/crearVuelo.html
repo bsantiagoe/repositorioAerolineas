@@ -1,0 +1,18 @@
+{%extends "master.html"%}
+{%block contenido%}
+<div class="row">
+  <div class="col-md-5 col-md-offset-4">
+    <h1>Nuevo Vuelo</h1>
+      <div class="well well-md">
+        <form role="form" id='formulario' method="POST">{% csrf_token %}
+          <table class="table">
+            {{f}}
+          </table>
+          <br>
+          <input type="submit" class="btn btn-success btn-md" value="Registrar">
+            <a href="../consultar" class="btn btn-success btn-md" role="button">Regresar</a>
+        </form>
+      </div>
+  </div>
+</div>
+{%endblock%}

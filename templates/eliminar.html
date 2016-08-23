@@ -1,0 +1,14 @@
+{% extends "master.html" %}
+{% block contenido %}
+{% load staticfiles %}
+<div class="container">
+  <div class="well well-lg">
+    <h1>Atención</h1>
+    <div class="row alert alert-danger">
+      <h2>Esta seguro, que desea eliminar {{v.clase}}...?</h2>
+      <a href="../eliminarV?id={{v.id}}" class="btn btn-success btn-md" role="button">Si, seguro</a>
+      <a href="../consultar" class="btn btn-success btn-md" role="button">No, regresar</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
